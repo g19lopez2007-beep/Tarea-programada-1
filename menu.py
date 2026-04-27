@@ -3,6 +3,8 @@
 #Última modificación: 26/4/26
 #Versión de Python: 3.14
 
+from funciones import mostrarTokens
+
 def submenuBitacora():
     '''
     Funcionamiento:
@@ -53,7 +55,7 @@ def menu():
         if opcion=="1":
             print("Aquí debe llamar la función cargarTokens()")
         elif opcion=="2":
-            print("Aquí debe llamar la función mostrarTokens()")
+            mostrarTokens(tokens)
         elif opcion=="3":
             print("Aquí debe llamar la función agregarModificarTokens()")
         elif opcion=="4":
