@@ -3,7 +3,8 @@
 #Última modificación: 26/4/26
 #Versión de Python: 3.14
 
-from funciones import mostrarTokens, agregarModificarTokens
+from funciones import *
+from funcionesAux import confirmarOpcion3
 
 def submenuBitacora():
     '''
@@ -59,7 +60,9 @@ def menu():
         elif opcion=="3":
             cadena=input("Digite los tokens: ")
             separador=input("Digite el separador usado: ")
-            tokens=agregarModificarTokens(tokens,cadena,separador)
+            validar=input('Desea continuar? 1=Si, 0=No: ')
+            if confirmarOpcion3(validar)==True:
+                tokens=agregarModificarTokens(tokens,cadena,separador)
         elif opcion=="4":
             print("Aquí debe llamar la función guardarTokens()")
         elif opcion=="5":

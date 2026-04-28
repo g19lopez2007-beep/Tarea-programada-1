@@ -35,3 +35,13 @@ def agregarModificarTokensAux(pToken,pSeparador):
     elif pSeparador=="":
         return "El separador no puede estar vacío"
     return True
+
+def confirmarOpcion3(pOpcion):
+    if pOpcion=='1':
+        return True
+    elif pOpcion=='0':
+        print('Opción cancelada')
+        return False
+    else:
+        print('Opción no valida')
+        return False

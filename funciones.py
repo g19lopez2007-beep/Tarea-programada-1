@@ -30,7 +30,7 @@ def agregarModificarTokens(pTokens,pPartes,pSeparador):
         Se muestra si el token fue agregado, actualizado o si ocurrió algún error.
         Además, se retorna la lista de tokens actualizada.
     '''
-    partes=pPartes.split(",")  #Separa la cadena ingresada por el usuario usando comas
+    partes=pPartes.split(" ")  #Separa la cadena ingresada con espacio
     i=0 #Contador para recorrer cada token separado
     while i<len(partes):
         token=partes[i].strip() #Guarda un token individual y elimina espacios al inicio y al final
@@ -45,14 +45,8 @@ def agregarModificarTokens(pTokens,pPartes,pSeparador):
                 nuevo=datos[1].strip() #Guarda el nuevo reemplazo sin espacios extra
                 posicion=buscarPosicionToken(original,pTokens) #Busca si la palabra original ya existe
                 if posicion!=-1: #Si la posición es diferente de -1, significa que el token ya existe
-                    validar=input('Va a cambaiar un token desea continuar 1=Si, 0=No: ')  #Confirma si desea actualizar
-                    if validar=='1': #Actualiza el token en la posición encontrada
                         pTokens[posicion]=(original,nuevo)
                         print("Token actualizado:",original)
-                    elif validar=='0':
-                        print("El token", original, 'No se actualizo')
-                    else:
-                        print('Opción invalida')
                 else:
                     pTokens.append((original,nuevo))  #Agrega el token nuevo como una tupla
                     print("Token agregado:",original)
