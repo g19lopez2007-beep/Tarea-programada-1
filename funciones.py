@@ -123,4 +123,4 @@ def guardarCSV(pTokens):
         for original, nuevo, contador in pTokens: #Crea el como se tiene que ver
             fila = f"{original}={nuevo}({contador})"
             writer.writerow([fila])
-    print("Tokens guardados en tokens.csv")
+
