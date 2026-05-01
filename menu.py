@@ -54,21 +54,25 @@ def menu():
         print("9. Salir")
         opcion=input("Seleccione una opción: ")
         if opcion=="1":
-            print("Aquí debe llamar la función cargarTokens()")
+            nombre=input("Por favor ingrese el nombre del archivo para cargar los tokens: ")
+            separador=input("Por favor ingrese el separador usado para cargar los tokens: ")
+            tokens=cargarTokens(tokens, nombre, separador)
         elif opcion=="2":
             mostrarTokens(tokens)
         elif opcion=="3":
             cadena=input("Digite los tokens: ")
             separador=input("Digite el separador usado: ")
-            validar=input('Desea continuar? 1=Si, 0=No: ')
+            validar=input("Desea continuar? 1=Si, 0=No: ")
             if confirmarOpcion3(validar)==True:
                 tokens=agregarModificarTokens(tokens,cadena,separador)
         elif opcion=="4":
-            print("Aquí debe llamar la función guardarTokens()")
+            nombre=input("Por favor ingrese el nombre del archivo para guardar los tokens: ")
+            separador=input("Por favor ingrese el separador usado para guardar los tokens: ")
+            guardarTokens(tokens, nombre, separador)
         elif opcion=="5":
             print("Aquí debe llamar la función traducirCodigo()")
         elif opcion=="6":
-            print("Aquí debe llamar la función generarCSV()")
+            guardarCSV(tokens)
         elif opcion=="7":
             print("Aquí debe llamar la función generarHTML()")
         elif opcion=="8":
