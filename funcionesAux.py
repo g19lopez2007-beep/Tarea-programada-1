@@ -80,3 +80,72 @@ def cargarTokensAux(nombre, separador):
     elif separador.strip()=="": #Valida si el separador está vacío o solo tiene espacios
         return "El separador no puede estar vacío"
     return True
+
+
+def separarLineaAux(pLinea):
+    """
+     Entrada:
+    - Una línea que contiene un token en formato "original->nuevo".  
+    Salida:
+    - Lista con dos elementos: [original, nuevo] 
+    """
+    resultado=[]
+    palabra=""
+
+    i=0
+    while i<len(pLinea):
+        letra=pLinea[i]
+        if letra.isalnum():
+            palabra+=letra
+
+        else:
+            if palabra!="":
+                resultado.append(palabra)
+                palabra=""
+            if letra !=" " :
+                resultado.append(letra)
+        i+=1
+
+    if palabra!="":
+        resultado.append(palabra)
+    return resultado
+
+
+def traducirLineaAux(linea, pTokens):
+
+    '''
+    Funcionamiento:
+    -Entrada:
+        Se recibe una línea de texto (string) y la lista de tokens con formato
+        (original, nuevo, contador).
+    -Salida:
+        Se retorna una nueva línea traducida donde las palabras que coinciden
+        con los tokens son reemplazadas por su equivalente, y además se actualiza
+        el contador de cada token utilizado.
+   '''
+    lista = separarLineaAux(linea)
+
+    nuevaLista = []
+    i = 0
+
+    while i < len(lista):
+        elemento = lista[i]
+
+        pos = buscarPosicionToken(elemento, pTokens)
+
+        if pos != -1:
+            original, nuevo, contador = pTokens[pos]
+            nuevaLista.append(nuevo)
+            pTokens[pos] = (original, nuevo, contador + 1)
+        else:
+            nuevaLista.append(elemento)
+
+        i += 1
+
+    nuevaLinea = ""
+    i = 0
+    while i < len(nuevaLista):
+        nuevaLinea += nuevaLista[i]
+        i += 1
+
+    return nuevaLinea
