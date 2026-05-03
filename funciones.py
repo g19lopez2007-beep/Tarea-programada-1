@@ -124,3 +124,34 @@ def guardarCSV(pTokens):
             fila = f"{original}={nuevo}({contador})"
             writer.writerow([fila])
 
+
+# Funcionalida 5: Traducir código
+
+def traducirArchivo(nombreEntrada, nombreSalida, pTokens):
+    '''
+    Funcionamiento:
+    -Entrada:
+        Se recibe el nombre del archivo de entrada, el nombre del archivo de salida
+        y la lista de tokens con formato (original, nuevo, contador).
+    -Salida:
+        Se genera un nuevo archivo con el contenido traducido utilizando los tokens,
+        procesando el archivo línea por línea.
+    '''
+    try:
+        entrada = open(nombreEntrada, "r")
+        salida = open(nombreSalida, "w")
+    except FileNotFoundError:
+        print("Error al abrir los archivos")
+        return
+
+    linea = entrada.readline()
+
+    while linea != "":
+        nuevaLinea = traducirLineaAux(linea, pTokens)
+        salida.write(nuevaLinea)
+        linea = entrada.readline()
+
+    entrada.close()
+    salida.close()
+
+    print("Archivo traducido correctamente")

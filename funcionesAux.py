@@ -102,8 +102,8 @@ def separarLineaAux(pLinea):
             if palabra!="":
                 resultado.append(palabra)
                 palabra=""
-            if letra !=" " :
-                resultado.append(letra)
+            resultado.append(letra)
+            
         i+=1
 
     if palabra!="":
