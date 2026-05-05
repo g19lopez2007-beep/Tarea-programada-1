@@ -149,6 +149,7 @@ def traducirLineaAux(linea, pTokens):
         i += 1
     return nuevaLinea
 
+#Funcion Aux de la opción 6 del menú:
 def CSVAux(pTokens):
     '''
     Funcionamiento:
@@ -157,6 +158,6 @@ def CSVAux(pTokens):
     -Salida:
         Se retorna True o False dependiendo de si la lista de tokens es vacía o no.
     '''
-    if len(pTokens)=='':
-        return "No hay tokens para guardar"
+    if len(pTokens)==0: #Valida si la lista de tokens está vacía
+        return "No hay tokens para generar el CSV"
     return True
