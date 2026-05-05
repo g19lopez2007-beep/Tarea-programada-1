@@ -153,6 +153,10 @@ def guardarCSV(pTokens):
     -Salida:
         En base a la lista de tokens se crea el CSV donde se agrega la ultima versión de cada token, y el contador de cuántas veces se ha actualizado cada token.
     '''
+    validacion=CSVAux(pTokens)
+    if validacion!=True:
+        print(validacion)
+        return pTokens #Retorna la lista sin cambios para evitar perder los tokens
     with open("tokens.csv", mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["La distribución es: Original, Token, Contador"])  #Escribe la cabecera del CSV
