@@ -126,7 +126,6 @@ def guardarCSV(pTokens):
 
 
 # Funcionalida 5: Traducir código
-
 def traducirArchivo(nombreEntrada, nombreSalida, pTokens):
     '''
     Funcionamiento:
@@ -143,15 +142,44 @@ def traducirArchivo(nombreEntrada, nombreSalida, pTokens):
     except FileNotFoundError:
         print("Error al abrir los archivos")
         return
-
     linea = entrada.readline()
-
     while linea != "":
         nuevaLinea = traducirLineaAux(linea, pTokens)
         salida.write(nuevaLinea)
         linea = entrada.readline()
-
     entrada.close()
     salida.close()
-
     print("Archivo traducido correctamente")
+
+# Funcionalidad 7: Generar reporte HTML
+def generarHTML(pTokens):
+    '''
+    Funcionamiento:
+    -Entrada:
+        Lista de tokens (original, nuevo, contador)
+    -Salida:
+        Se genera un archivo HTML con una tabla que muestra los tokens
+    '''
+    try:
+        with open("reporte.html", "w", encoding="utf-8") as file:
+            file.write("<html>\n")
+            file.write("<head>\n")
+            file.write("<title>Reporte de Tokens</title>\n")
+            file.write("</head>\n")
+            file.write("<body>\n")
+            file.write("<h1>Reporte de Tokens</h1>\n")
+            file.write("<table border='1'>\n")
+            file.write("<tr><th>Original</th><th>Token</th><th>Contador</th></tr>\n")
+            for original, nuevo, contador in pTokens:
+                file.write("<tr>")
+                file.write(f"<td>{original}</td>")
+                file.write(f"<td>{nuevo}</td>")
+                file.write(f"<td>{contador}</td>")
+                file.write("</tr>\n")
+            file.write("</table>\n")
+            file.write("</body>\n")
+            file.write("</html>\n")
+        print("Archivo HTML generado correctamente")
+    except:
+        print("Error al generar el HTML")
+
