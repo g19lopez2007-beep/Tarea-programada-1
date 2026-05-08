@@ -201,12 +201,31 @@ def generarHTML(pTokens):
 def guardarBitacora(mensaje):
     '''
     Funcionamiento:
-    -Entrada:
-        Se recibe un mensaje con la acción realizada.
-    -Salida:
-        Se guarda el mensaje en el archivo bitácora.
+    -Entrada: Se recibe un mensaje con la acción realizada.
+    -Salida: Se guarda el mensaje en el archivo bitácora.
     '''
     archivo = open("bitacora.txt", "a")
     archivo.write(mensaje + "\n")
     archivo.close()
     print("Mensaje guardado en la bitácora")
+
+def bitacoraPorDia():
+    '''
+    Funcionamiento:
+    -Entrada: Se recibe una fecha ingresada por el usuario.
+    -Salida: Se muestran las acciones registradas en esa fecha.
+    '''
+    fechaBuscada = input("Ingrese la fecha (YYYY-MM-DD): ")
+    try:
+        archivo = open("bitacora.txt", "r", encoding="utf-8")
+        encontrado = False
+        for linea in archivo:
+            if fechaBuscada in linea:
+                print(linea.strip())
+                encontrado = True
+        if encontrado == False:
+            print("No hay acciones registradas para esa fecha")
+        archivo.close()
+    except:
+        print("Error al leer la bitácora")
+
