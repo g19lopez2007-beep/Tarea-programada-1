@@ -83,3 +83,35 @@ def menu():
         else:
             print("Opción inválida")
 menu()
+
+def submenuBitacora():
+    '''
+    Funcionamiento:
+    -Entrada:
+        El usuario selecciona una opción del submenú.
+    -Salida:
+        Se ejecutan las funciones de búsqueda de bitácora.
+    '''
+
+    opcion = ""
+
+    while opcion != "0":
+
+        print("\n===== BITÁCORA =====")
+        print("1. Acciones por día escogido")
+        print("2. Acciones por palabra clave")
+        print("0. Salir")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            bitacoraPorDia()
+
+        elif opcion == "2":
+            bitacoraPorPalabra()
+
+        elif opcion == "0":
+            print("Saliendo de bitácora")
+
+        else:
+            print("Opción inválida")
