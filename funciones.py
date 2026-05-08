@@ -229,3 +229,25 @@ def bitacoraPorDia():
     except:
         print("Error al leer la bitácora")
 
+def bitacoraPorPalabra():
+    '''
+    Funcionamiento:
+    -Entrada:
+        Se recibe una palabra clave ingresada por el usuario.
+    -Salida:
+        Se muestran las acciones que contienen esa palabra.
+    '''
+    palabra = input("Ingrese palabra clave: ").lower()
+    try:
+        archivo = open("bitacora.txt", "r", encoding="utf-8")
+        encontrado = False
+        for linea in archivo:
+            if palabra in linea.lower():
+                print(linea.strip())
+                encontrado = True
+        if encontrado == False:
+            print("No se encontraron coincidencias")
+
+        archivo.close()
+    except:
+        print("Error al leer la bitácora")
