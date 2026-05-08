@@ -196,3 +196,17 @@ def generarHTML(pTokens):
     except:
         print("Error al generar el HTML")
 
+#Funciones de la opcion 8
+
+def guardarBitacora(mensaje):
+    '''
+    Funcionamiento:
+    -Entrada:
+        Se recibe un mensaje con la acción realizada.
+    -Salida:
+        Se guarda el mensaje en el archivo bitácora.
+    '''
+    archivo = open("bitacora.txt", "a")
+    archivo.write(mensaje + "\n")
+    archivo.close()
+    print("Mensaje guardado en la bitácora")
