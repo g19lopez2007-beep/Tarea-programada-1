@@ -74,7 +74,7 @@ def menu():
         elif opcion=="6":
             guardarCSV(tokens)
         elif opcion=="7":
-            print("Aquí debe llamar la función generarHTML()")
+            generarHTML(tokens)
         elif opcion=="8":
             submenuBitacora()
         elif opcion=="9":
