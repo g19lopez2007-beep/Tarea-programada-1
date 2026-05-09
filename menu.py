@@ -1,36 +1,12 @@
 #Creadores: Gustavo López Alvarado y Mel Acuña
 #Día de creación: 26/4/26
-#Última modificación: 26/4/26
+#Última modificación: 08/05/26
 #Versión de Python: 3.14
 
 from funciones import *
 from funcionesAux import confirmarOpcion3
 
-def submenuBitacora():
-    '''
-    Funcionamiento:
-    -Entrada:
-        El usuario ingresa un número
-        1 = sirve para elegir la opción de buscar por acciones por día escogido
-        2 = sirve para elegir la opción de buscar por acciones por palabra clave
-        3 = para salir del submenú
-    -Salida:
-        Se muestra el resultado de la opción que se eligiera
-    '''
-    while True:
-        print("\n===== BITÁCORA =====")
-        print("1. Acciones por día escogido")
-        print("2. Acciones por palabra clave")
-        print("3. Salir del submenú")
-        opcion=input("Digite una opción: ")
-        if opcion=="1": #Si la opción es 1 se muestra el resultado de buscarBitacoraPorDia
-            print("Aquí debe llamar buscarBitacoraPorDia()")
-        elif opcion=="2": #Si la opción es 2 se muestra el resultado de buscarBitacoraPorPalabra
-            print("Aquí debe llamar buscarBitacoraPorPalabra()")
-        elif opcion=="3": #Si la opción es 3 se sale del menú
-            break
-        else:
-            print("Opción inválida")
+
 
 def menu():
     '''
@@ -112,6 +88,7 @@ def submenuBitacora():
 
         elif opcion == "0":
             print("Saliendo de bitácora")
+            break
 
         else:
             print("Opción inválida")

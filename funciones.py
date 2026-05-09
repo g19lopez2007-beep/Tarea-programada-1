@@ -1,6 +1,6 @@
 #Creadores: Gustavo López Alvarado y Mel Acuña
 #Día de creación: 26/4/26
-#Última modificación: 5/5/26
+#Última modificación: 08/5/26
 #Versión de Python: 3.14
 
 from funcionesAux import *
