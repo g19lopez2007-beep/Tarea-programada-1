@@ -5,6 +5,8 @@
 
 from funcionesAux import *
 import csv
+import webbrowser
+from datetime import datetime
 
 #Funcion de la opción 1:
 def cargarTokens(pTokens, nombre, separador):
@@ -23,7 +25,6 @@ def cargarTokens(pTokens, nombre, separador):
     except FileNotFoundError:
         print("Archivo no encontrado")
         return pTokens #Retorna la lista sin cambios para evitar perder los tokens
-    nuevaLista=[] #Crea una nueva lista para almacenar los tokens cargados
     for linea in archivo: #Recorre cada línea del archivo
         linea=linea.strip() #Elimina espacios al inicio y al final de la línea
         if separador in linea:
@@ -33,11 +34,11 @@ def cargarTokens(pTokens, nombre, separador):
                 nuevo=partes[1].strip().lower() #Guarda el nuevo reemplazo sin espacios extra
                 posicion=buscarPosicionToken(original,pTokens) #Busca si la palabra original ya existe
                 if posicion!=-1: #Si la posición es diferente de -1, significa que el token ya existe
-                    _, _, contador = pTokens[posicion] #Lo que hace es una funcion que hace que no se tomen los otros 2 elementos de la tupla y solo se use el contador
-                    pTokens[posicion]=(original,nuevo,contador+1) #Actualiza el token existente con el nuevo reemplazo y aumenta el contador
+                    _,_,contadorActualizaciones,contadorUsos=pTokens[posicion]
+                    pTokens[posicion]=(original,nuevo,contadorActualizaciones+1,contadorUsos)
                     print("Token actualizado:",original)
                 else:
-                    pTokens.append((original,nuevo,1)) #Agrega el token nuevo como una tupla
+                    pTokens.append((original,nuevo,1,0)) #Agrega el token nuevo como una tupla
                     print("Token agregado:",original)
     archivo.close() #Cierra el archivo después de leerlo
     return pTokens #Retorna los tokens cargados
@@ -89,11 +90,11 @@ def agregarModificarTokens(pTokens,pPartes,pSeparador):
                 nuevo=datos[1].strip() #Guarda el nuevo reemplazo sin espacios extra
                 posicion=buscarPosicionToken(original,pTokens) #Busca si la palabra original ya existe
                 if posicion!=-1: #Si la posición es diferente de -1, significa que el token ya existe
-                        _, _, contador = pTokens[posicion] #Lo que hace es una funcion que hace que no se tomen los otros 2 elementos de la tupla y solo se use el contador
-                        pTokens[posicion]=(original,nuevo,contador+1) #Actualiza el token existente con el nuevo reemplazo y aumenta el contador
-                        print("Token actualizado:",original)
+                    _,_,contadorActualizaciones,contadorUsos=pTokens[posicion]
+                    pTokens[posicion]=(original,nuevo,contadorActualizaciones+1,contadorUsos)
+                    print("Token actualizado:",original)
                 else:
-                    pTokens.append((original,nuevo,1)) #Agrega el token nuevo como una tupla
+                    pTokens.append((original,nuevo,1,0)) #Agrega el token nuevo como una tupla
                     print("Token agregado:",original)
         i+=1 #Avanza al siguiente token ingresado
     return pTokens #Retorna la lista con los cambios realizados
@@ -131,6 +132,7 @@ def traducirArchivo(nombreEntrada, nombreSalida, pTokens):
     validacion=tokensAux(pTokens)
     if validacion!=True:
         print(validacion)
+        return
     try:
         entrada = open(nombreEntrada, "r")
         salida = open(nombreSalida, "w")
@@ -162,8 +164,8 @@ def guardarCSV(pTokens):
     with open("tokens.csv", mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["La distribución es: Original, Token, Contador"])  #Escribe la cabecera del CSV
-        for original, nuevo, contador in pTokens: #Crea el como se tiene que ver
-            fila = f"{original}={nuevo}({contador})"
+        for original,nuevo,contadorActualizaciones,contadorUsos in pTokens:
+            fila=f"{original}={nuevo}({contadorActualizaciones})"
             writer.writerow([fila])
     print("El archivo CSV fue generado correctamente")
 
@@ -190,21 +192,21 @@ def generarHTML(pTokens):
             file.write("<h1>Reporte de Tokens</h1>\n")
             file.write("<table border='1'>\n")
             file.write("<tr><th>Original</th><th>Token</th><th>Contador</th></tr>\n")
-            for original, nuevo, contador in pTokens:
+            for original,nuevo,contadorActualizaciones,contadorUsos in pTokens:
                 file.write("<tr>")
                 file.write(f"<td>{original}</td>")
                 file.write(f"<td>{nuevo}</td>")
-                file.write(f"<td>{contador}</td>")
+                file.write(f"<td>{contadorUsos}</td>")
                 file.write("</tr>\n")
             file.write("</table>\n")
             file.write("</body>\n")
             file.write("</html>\n")
         print("Archivo HTML generado correctamente")
+        webbrowser.open("reporte.html")
     except:
         print("Error al generar el HTML")
 
 #Funciones de la opcion 8
-
 def guardarBitacora(mensaje):
     '''
     Funcionamiento:
@@ -213,10 +215,10 @@ def guardarBitacora(mensaje):
     -Salida: 
         Se guarda el mensaje en el archivo bitácora.
     '''
-    archivo = open("bitacora.txt", "a")
-    archivo.write(mensaje + "\n")
+    fecha=datetime.now().strftime("%Y-%m-%d")
+    archivo=open("bitacora.txt","a",encoding="utf-8")
+    archivo.write(fecha+" - "+mensaje+"\n")
     archivo.close()
-    print("Mensaje guardado en la bitácora")
 
 def bitacoraPorDia():
     '''
@@ -258,7 +260,6 @@ def bitacoraPorPalabra():
                 encontrado = True
         if encontrado == False:
             print("No se encontraron coincidencias")
-
         archivo.close()
     except:
         print("Error al leer la bitácora")

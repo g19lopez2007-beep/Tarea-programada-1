@@ -56,6 +56,7 @@ def menu():
             nombre=input("Por favor ingrese el nombre del archivo para cargar los tokens: ")
             separador=input("Por favor ingrese el separador usado para cargar los tokens: ")
             tokens=cargarTokens(tokens, nombre, separador)
+            guardarBitacora("Se cargaron tokens desde archivo")
         elif opcion=="2":
             mostrarTokens(tokens)
         elif opcion=="3":
@@ -64,20 +65,25 @@ def menu():
             validar=input("Desea continuar? 1=Si, 0=No: ")
             if confirmarOpcion3(validar)==True:
                 tokens=agregarModificarTokens(tokens,cadena,separador)
+                guardarBitacora("Se agregaron o modificaron tokens")
         elif opcion=="4":
             nombre=input("Por favor ingrese el nombre del archivo para guardar los tokens: ")
             separador=input("Por favor ingrese el separador usado para guardar los tokens: ")
             guardarTokens(tokens, nombre, separador)
+            guardarBitacora("Se guardaron tokens en archivo")
         elif opcion=="5":
             nombreEntrada=input("Por favor ingrese el nombre del archivo de entrada: ")
             nombreSalida=input("Por favor ingrese el nombre del archivo de salida: ")
             traducirArchivo(nombreEntrada, nombreSalida, tokens)
+            guardarBitacora("Se tradujo un archivo")
         elif opcion=="6":
             guardarCSV(tokens)
+            guardarBitacora("Se generó el reporte CSV")
         elif opcion=="7":
             generarHTML(tokens)
         elif opcion=="8":
             submenuBitacora()
+            guardarBitacora("Se generó el reporte HTML")
         elif opcion=="9":
             print("Saliendo del programa...")
             break

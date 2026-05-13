@@ -32,7 +32,7 @@ def buscarPosicionToken(pPalabra,pTokens):
     i=0
     while i<len(pTokens):
         if pTokens[i][0].lower()==pPalabra.lower(): #Compara la palabra original del token con la palabra buscada
-#El i es para agarrar las diferentes tuplas dentro de la lista y el 0 es para agarrar la palabra que se busca dentro de esa tupla
+        #El i es para agarrar las diferentes tuplas dentro de la lista y el 0 es para agarrar la palabra que se busca dentro de esa tupla
             return i #Retorna la posición donde encontró la palabra
         i+=1
     return -1 #Retorna -1 si no encontró la palabra
@@ -153,9 +153,9 @@ def traducirLineaAux(linea, pTokens):
         elemento = lista[i]
         pos = buscarPosicionToken(elemento, pTokens)
         if pos != -1:
-            original, nuevo, contador = pTokens[pos]
+            original,nuevo,contadorActualizaciones,contadorUsos=pTokens[pos]
             nuevaLista.append(nuevo)
-            pTokens[pos] = (original, nuevo, contador + 1)
+            pTokens[pos]=(original,nuevo,contadorActualizaciones,contadorUsos+1)
         else:
             nuevaLista.append(elemento)
         i += 1
