@@ -1,6 +1,6 @@
 #Creadores: Gustavo López Alvarado y Mel Acuña
 #Día de creación: 26/4/26
-#Última modificación: 26/4/26
+#Última modificación: 12/05/26
 #Versión de Python: 3.14
 
 from funciones import *
@@ -10,24 +10,23 @@ def submenuBitacora():
     '''
     Funcionamiento:
     -Entrada:
-        El usuario ingresa un número
-        1 = sirve para elegir la opción de buscar por acciones por día escogido
-        2 = sirve para elegir la opción de buscar por acciones por palabra clave
-        3 = para salir del submenú
+        El usuario selecciona una opción del submenú.
     -Salida:
-        Se muestra el resultado de la opción que se eligiera
+        Se ejecutan las funciones de búsqueda de bitácora.
     '''
-    while True:
+    opcion = ""
+    while opcion != "0":
         print("\n===== BITÁCORA =====")
         print("1. Acciones por día escogido")
         print("2. Acciones por palabra clave")
-        print("3. Salir del submenú")
-        opcion=input("Digite una opción: ")
-        if opcion=="1": #Si la opción es 1 se muestra el resultado de buscarBitacoraPorDia
-            print("Aquí debe llamar buscarBitacoraPorDia()")
-        elif opcion=="2": #Si la opción es 2 se muestra el resultado de buscarBitacoraPorPalabra
-            print("Aquí debe llamar buscarBitacoraPorPalabra()")
-        elif opcion=="3": #Si la opción es 3 se sale del menú
+        print("0. Salir")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            bitacoraPorDia()
+        elif opcion == "2":
+            bitacoraPorPalabra()
+        elif opcion == "0":
+            print("Saliendo de bitácora")
             break
         else:
             print("Opción inválida")
@@ -70,11 +69,13 @@ def menu():
             separador=input("Por favor ingrese el separador usado para guardar los tokens: ")
             guardarTokens(tokens, nombre, separador)
         elif opcion=="5":
-            print("Aquí debe llamar la función traducirCodigo()")
+            nombreEntrada=input("Por favor ingrese el nombre del archivo de entrada: ")
+            nombreSalida=input("Por favor ingrese el nombre del archivo de salida: ")
+            traducirArchivo(nombreEntrada, nombreSalida, tokens)
         elif opcion=="6":
             guardarCSV(tokens)
         elif opcion=="7":
-            print("Aquí debe llamar la función generarHTML()")
+            generarHTML(tokens)
         elif opcion=="8":
             submenuBitacora()
         elif opcion=="9":
