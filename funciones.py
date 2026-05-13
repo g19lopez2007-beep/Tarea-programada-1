@@ -207,17 +207,19 @@ def generarHTML(pTokens):
         print("Error al generar el HTML")
 
 #Funciones de la opcion 8
-def guardarBitacora(mensaje):
+def guardarBitacora(pBitacora,pMensaje):
     '''
     Funcionamiento:
-    -Entrada: 
+    -Entrada:
         Se recibe un mensaje con la acción realizada.
-    -Salida: 
-        Se guarda el mensaje en el archivo bitácora.
+    -Salida:
+        Se guarda la acción en la bitácora con fecha, hora y descripción.
     '''
-    fecha=datetime.now().strftime("%Y-%m-%d")
+    fecha=datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    registro=(fecha,pMensaje)
+    pBitacora.append(registro)
     archivo=open("bitacora.txt","a",encoding="utf-8")
-    archivo.write(fecha+" - "+mensaje+"\n")
+    archivo.write(str(registro)+"\n")
     archivo.close()
 
 def bitacoraPorDia():
